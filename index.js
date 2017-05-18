@@ -12,11 +12,9 @@ exports.middleware = (store) => (next) => (action) => {
       matches.forEach(emoji => {
         let emoji_data = emoji.split(':')[1]
         
-        let char
+        let char = emoji
         if (emoji_data in emojilib.lib) {
           char = emojilib.lib[emoji_data].char
-        } else {
-          char = '\uFFFD'
         }
 
         //replace all
