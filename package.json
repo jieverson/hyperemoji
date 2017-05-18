@@ -1,19 +1,16 @@
 {
-  "name": "hyperpower",
-  "version": "0.3.0",
+  "name": "hyperemoji",
+  "version": "0.0.1",
   "keywords": [
     "hyper",
     "hyper.app"
   ],
-  "description": "Extension for particle effects in Hyper",
+  "description": "Extension for emoji :keywords: in Hyper",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zeit/hyperpower.git"
+    "url": "git+https://github.com/jieverson/hyperemoji.git"
   },
   "dependencies": {
-    "color": "0.11.3",
-    "convert-css-color-name-to-hex": "0.1.1",
-    "lodash.throttle": "4.1.1",
-    "lodash.values": "4.3.0"
+    "emojilib": "^2.2.1"
   }
 }
