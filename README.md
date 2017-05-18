@@ -20,7 +20,7 @@ Then you are ready to use:
 ## Screenshot
 
 <p align="center">
-  <img src="screenshot.png" />
+  <img src="https://raw.githubusercontent.com/jieverson/hyperemoji/master/screenshot.png" />
 </p>
 
 ## Credits
