@@ -1,7 +1,7 @@
 
 # Hyperemoji
 
-Extension for emoji :keywords: in Hyper.
+Emoji `:keyword:` plugin for Hyper.
 
 Check [emoji cheat sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet/).
 
