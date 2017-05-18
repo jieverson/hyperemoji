@@ -17,6 +17,12 @@ Then you are ready to use:
 ```
 :smile:
 
+## Screenshot
+
+<p align="center">
+  <img src="screenshot.png" />
+</p>
+
 ## Credits
 
 Based on [`emojilib`](https://github.com/muan/emojilib).
