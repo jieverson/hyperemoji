@@ -1,13 +1,37 @@
 const emojilib = require('emojilib')
 
-exports.middleware = (store) => (next) => (action) => {
-  let action_type = action.type
-  if('SESSION_ADD_DATA' === action_type || 'SESSION_PTY_DATA' === action_type){
-    let data = action.data
+let term
 
-    let regex = /:\w+:/g
-    let matches = data.match(regex)
+//let moveCursor
 
+exports.decorateTerm = (Term, { React }) => class extends React.Component {
+  render() {
+    return React.createElement(Term, Object.assign({}, this.props, {
+      onTerminal: (t) => {
+        console.log('onTerminal')
+        term = t
+      }
+    }));
+  }
+};
+
+exports.reduceUI = (state, action) => {
+  console.log('reduceUI')
+
+  if(!term) return state
+
+  let doc = term.getDocument()
+  let html = doc.children[0]
+  let body = html.children[1]
+  let rows = body.querySelectorAll('x-row')
+
+  const regex = /:\w+:/g
+
+  rows.forEach(row => {
+    let html = row.innerHTML
+    let data = row.innerText
+    let matches = html.match(regex)
+    
     if(matches){
       matches.forEach(emoji => {
         let emoji_data = emoji.split(':')[1]
@@ -18,22 +42,24 @@ exports.middleware = (store) => (next) => (action) => {
         }
 
         //replace all
-        action.data = action.data.split(emoji).join(char + ' ')
+        row.innerHTML = row.innerHTML.split(emoji).join(char + ' ')
+        data = row.innerText
+        term.setCursorColumn(data.length) // +1 ?
+        //term.setCursorPosition(term.getCursorRow(), term.getCursorColumn())
       })
     }
-  }
+    /*else{
+      
+      if(data.split(' ').join('')){
+        term.setCursorColumn(data.length + 1)
+      }
+      
+    }*/
 
-  next(action)
-}
+    // set cursor column
+    //term.setCursorColumn(data.length + 1)
+    //term.setCursorPosition(term.getCursorRow(), term.getCursorColumn())
+  })
 
-/*
-//Debug for ticket on Hyper.js
-exports.middleware = (store) => (next) => (action) => {
-  if('SESSION_PTY_DATA' === action.type){
-    action.data = action.data.split('hello world').join("hi")
-    debugger
-  }
-  
-  next(action)
+  return state;
 }
-*/
