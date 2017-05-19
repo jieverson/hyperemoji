@@ -1,11 +1,23 @@
 const emojilib = require('emojilib')
 
+let term
+
+exports.decorateTerm = (Term, { React }) => class extends React.Component {
+  render() {
+    return React.createElement(Term, Object.assign({}, this.props, {
+      onTerminal: t => 
+        term = t
+    }))
+  }
+}
+
 exports.middleware = (store) => (next) => (action) => {
   let action_type = action.type
-  if('SESSION_ADD_DATA' === action_type || 'SESSION_PTY_DATA' === action_type){
+  
+  if('SESSION_PTY_DATA' === action_type){
     let data = action.data
 
-    let regex = /:\w+:/g
+    const regex = /:\w+:/g
     let matches = data.match(regex)
 
     if(matches){
